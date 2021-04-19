@@ -8,12 +8,9 @@ import (
 )
 
 
-type File struct {
-	Filename string `json:"filename"`
-}
 
-func (f *File) Fcreater() *os.File {
-	f1, err := os.Create(f.Filename)
+func Fcreater(f string) *os.File {
+	f1, err := os.Create(f)
 	if err != nil {
 		fmt.Println("this crete err now")
 	}
@@ -21,8 +18,8 @@ func (f *File) Fcreater() *os.File {
 	return f1
 }
 
-func (f *File) Fopener() *os.File {
-	f1, err := os.Open(f.Filename)
+func Fopener(f string) *os.File {
+	f1, err := os.Open(f)
 	if err != nil {
 		fmt.Println("this crete err now")
 	}
@@ -30,7 +27,7 @@ func (f *File) Fopener() *os.File {
 	return f1
 }
 
-func (f *File) Freader(r *os.File) {
+func Freader(r *os.File) {
 	bf := bufio.NewReader(r)
 	for {
 		data, err := bf.ReadString('\n')
@@ -46,7 +43,7 @@ func (f *File) Freader(r *os.File) {
 
 }
 
-func (f *File) Fwriter(w *os.File, str string) {
+func Fwriter(w *os.File, str string) {
 	n, err := w.Write([]byte(str))
 	if err == io.EOF {
 		fmt.Println("写入完成")
@@ -61,11 +58,8 @@ func (f *File) Fwriter(w *os.File, str string) {
 // 下面是使用指导
 
 // func main() {
-// 	var myFile file = file{Filename: ".\\a.txt"}
-// 	f := myFile.Fcreater()
-// 	defer f.Close()
-// 	myFile.Fwriter(f, "we come to 中国\n")
-// 	f = myFile.Fopener()
-// 	myFile.Freader(f)
-
+// 	filename := ".\\a.txt"
+// 	f := Fcreater(filename)
+// 	Fwriter(f,"my name is zhangsan")
+// 	f.Close()
 // }
