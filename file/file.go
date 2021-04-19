@@ -16,6 +16,7 @@ func Fcreater(f string) (*os.File, error) {
 	}
 	return f1,nil	
 }
+
 // 打开文件函数，返回两个值一个 文件句柄，一个error 错误
 func Fopener(f string) (*os.File, error) {
 	f1, err := os.Open(f)
@@ -41,8 +42,12 @@ func Freader(r *os.File) (string, bool) {
 }
 
 // 写入文件函数，返回一个bool值，通过bool判断成没成功
-func Fwriter(w *os.File, str string) bool{
-	_, err := w.Write([]byte(str))
+func Fwriter(filename, str string) bool{
+	f ,err := os.OpenFile(filename,os.O_CREATE|os.O_RDWR|os.O_APPEND,0777)
+	if err != nil {
+		fmt.Println("打开错误")
+	}
+	_, err = f.Write([]byte("\n"+str))
 	if err == io.EOF {
 		// fmt.Println("file writed OK")
 		return true
