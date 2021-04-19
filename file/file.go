@@ -32,14 +32,12 @@ func Freader(r *os.File) (string, bool) {
 	for {
 		data, err := bf.ReadString('\n')
 		if err == io.EOF {
-			return "", true
+			return data,true
 		} else if err != nil {
 			fmt.Println("this reader err now")
 			return "",false
 		}
-		return data,true
 	}
-
 }
 
 // 写入文件函数，返回一个bool值，通过bool判断成没成功
