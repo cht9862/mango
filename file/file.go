@@ -19,7 +19,7 @@ func Fcreater(f string) (*os.File, error) {
 
 // 打开文件函数，返回两个值一个 文件句柄，一个error 错误
 func Fopener(f string) (*os.File, error) {
-	f1, err := os.Open(f)
+	f1, err := os.OpenFile(f, os.O_RDWR|O_APPEND|O_CREATE, 0677)
 	if err != nil {
 		fmt.Println("this crete err now")
 		return nil,err
@@ -28,7 +28,12 @@ func Fopener(f string) (*os.File, error) {
 }
 
 // 读取文件函数,返回一个 string 类型的值
-func Freader(r *os.File) (string, bool) {
+func Freader(f string) (string, bool) {
+	r, err := os.OpenFile(f, os.O_RDWR|O_APPEND|O_CREATE, 0677)
+	if err != nil {
+		fmt.Println("this crete err now")
+		return nil,err
+	}
 	bf := bufio.NewReader(r)
 	for {
 		data, err := bf.ReadString('\n')
@@ -57,4 +62,3 @@ func Fwriter(filename, str string) bool{
 	}
 	return true
 }
-
