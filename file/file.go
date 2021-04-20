@@ -32,7 +32,7 @@ func Freader(f string) (string, bool) {
 	r, err := os.OpenFile(f, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0677)
 	if err != nil {
 		fmt.Println("this crete err now")
-		return nil,false
+		return "",false
 	}
 	bf := bufio.NewReader(r)
 	for {
