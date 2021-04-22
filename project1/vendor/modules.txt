@@ -1,3 +1,0 @@
-# github.com/cht9862/mango v0.0.0-20210420120459-5ca456659361
-## explicit
-github.com/cht9862/mango/file
